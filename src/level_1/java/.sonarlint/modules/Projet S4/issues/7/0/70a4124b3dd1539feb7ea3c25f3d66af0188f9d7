@@ -1,0 +1,9 @@
+
+Nsquid:S2885")Make "dateCourante" an instance variable.(®ïá¬H%RMAJORZBUG
+i
+squid:S106)"9Replace this use of System.out or System.err by a logger.(¡Ôä˜øÿÿÿÿH&RMAJORZ
+CODE_SMELL
+ksquid:S1118":Add a private constructor to hide the implicit public one.(ñİ°úÿÿÿÿH'RMAJORZ
+CODE_SMELL
+‰squid:S00120"WRename this package name to match the regular expression '^[a-z]+(\.[a-z][a-z0-9]*)*$'.(¦„‡±øÿÿÿÿH(RMINORZ
+CODE_SMELL

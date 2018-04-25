@@ -1,0 +1,9 @@
+
+Jsquid:S1700"Rename field "blockchain"(¥—ÞƒüÿÿÿÿHZRMAJORZ
+CODE_SMELL
+Vsquid:S1068"+Remove this unused "nbBlock" private field.(¯ÉñEH[RMAJORZ
+CODE_SMELL
+‰squid:S00120"WRename this package name to match the regular expression '^[a-z]+(\.[a-z][a-z0-9]*)*$'.(¦„‡±øÿÿÿÿH\RMINORZ
+CODE_SMELL
+Ysquid:S1068".Remove this unused "difficulty" private field.(¾œ±1H]RMAJORZ
+CODE_SMELL

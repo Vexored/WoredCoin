@@ -1,0 +1,14 @@
+
+Wsquid:S1481"+Remove this unused "SHA256" local variable.(•–ÙíH RMINORZ
+CODE_SMELL
+d
+squid:S106"9Replace this use of System.out or System.err by a logger.(–­™HRMAJORZ
+CODE_SMELL
+‰squid:S00120"WRename this package name to match the regular expression '^[a-z]+(\.[a-z][a-z0-9]*)*$'.(±¢™ùÿÿÿÿH#RMINORZ
+CODE_SMELL
+„squid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(ÉşÅçùÿÿÿÿHRMINORZ
+CODE_SMELL
+~squid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•–ÙíH"RMINORZ
+CODE_SMELL
+asquid:S2209"5Change this instance-reference to a static reference.(–­™H!RMAJORZ
+CODE_SMELL

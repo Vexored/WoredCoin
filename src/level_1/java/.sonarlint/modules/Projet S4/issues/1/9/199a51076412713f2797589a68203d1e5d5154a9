@@ -1,0 +1,13 @@
+
+Usquid:S1068")Remove this unused "index" private field.(ÕÖóH/RMAJORZ
+CODE_SMELL
+^squid:S1068"-Remove this unused "timestamp" private field.(ÀãùûúÿÿÿÿH0RMAJORZ
+CODE_SMELL
+Vsquid:S1068"*Remove this unused "source" private field.(Æ¾Ù†H1RMAJORZ
+CODE_SMELL
+`squid:S1068"/Remove this unused "destination" private field.(¬†¾ØüÿÿÿÿH2RMAJORZ
+CODE_SMELL
+\squid:S1068"+Remove this unused "montant" private field.(íâŠ¡üÿÿÿÿH3RMAJORZ
+CODE_SMELL
+‰squid:S00120"WRename this package name to match the regular expression '^[a-z]+(\.[a-z][a-z0-9]*)*$'.(¦„‡±øÿÿÿÿH4RMINORZ
+CODE_SMELL

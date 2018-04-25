@@ -1,0 +1,21 @@
+
+Usquid:S1068")Remove this unused "index" private field.(ÕÖóHRMAJORZ
+CODE_SMELL
+^squid:S1068"-Remove this unused "timestamp" private field.(ÀãùûúÿÿÿÿHRMAJORZ
+CODE_SMELL
+]squid:S1068",Remove this unused "hashMerk" private field.(š¯ğÖüÿÿÿÿHRMAJORZ
+CODE_SMELL
+]squid:S1068",Remove this unused "hashPrev" private field.(‡ºÑŠşÿÿÿÿHRMAJORZ
+CODE_SMELL
+\squid:S1068"+Remove this unused "nbTrans" private field.(ğãŠıÿÿÿÿHRMAJORZ
+CODE_SMELL
+Usquid:S1068")Remove this unused "nonce" private field.(Âô×úHRMAJORZ
+CODE_SMELL
+asquid:S1068"0Remove this unused "transactions" private field.(é²ª˜şÿÿÿÿHRMAJORZ
+CODE_SMELL
+xsquid:S00112<"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚ÒéüÿÿÿÿHRMAJORZ
+CODE_SMELL
+‰squid:S00120"WRename this package name to match the regular expression '^[a-z]+(\.[a-z][a-z0-9]*)*$'.(¦„‡±øÿÿÿÿHRMINORZ
+CODE_SMELL
+squid:S11493"_Replace the synchronized class "StringBuffer" by an unsynchronized one such as "StringBuilder".(ùÃ…ÜüÿÿÿÿHRMAJORZ
+CODE_SMELL
