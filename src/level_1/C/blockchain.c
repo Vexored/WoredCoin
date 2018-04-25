@@ -1,68 +1,13 @@
-################################# _BlockChain_ #################################
-# Contient la structure de donnée de la blockchain. Il défini aussi la liste
-# doublement chainé.
-#
-#
-#
-###############################################################################
+#define "blockchain.h"
 
+typedef struct sBlockList {
+  Block block;                //Block
+  struct sBlockList *next;    //Pointeur vers prochain block
+} *BlockList;
 
-
-#include <stdio.h>
-#include <stdlib.h>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-struct Blockchain {
-
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  return 0;
-}
+typedef struct sBlockChain {
+  int nbBlocks;               //Nombre de nbBlock
+  int difficulty;             //Difficulté de la blockchain
+  BlockList blocklist;        //Liste des blocks
+  BlockList lastBlockList;    //Dernier block
+} *BlockChain;

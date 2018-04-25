@@ -1,22 +1,17 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "block.h"
 
-#define MAX_DATE_SIZE 100
+struct sBlock{
 
-struct Block {
+  int index;                      //Numéro du BlockList
+  char timeStamp[TIMESTAMP_SIZE]; //
 
-  int index;
-  char[DATE_SIZE] timestamp;
-  int nb_transaction;
+  int nbTransaction;              //Nombre de transaction
+  char** transactionList;         //Liste des transactions
 
-  //Liste des transaction a implementer
+  char hashMerkleRoot[HASH_SIZE]; //Hash root de l'arbre de Merkle des transactions
+  char hashCurrent[HASH_SIZE];    //Hash du block courant
+  char prevHash[HASH_SIZE];       //Hash du block précèdent
 
-  char[HASH_SIZE] hash_prev;
-  char[HASH_SIZE] hash_root;
-  char[HASH_SIZE] hash_current;
+  int nonce;                    //Nombre pseudo aléatoire et unique
 
-  int nonce;
-
-  struct Block *p_next;
-  struct Block *p_prev;
 }
