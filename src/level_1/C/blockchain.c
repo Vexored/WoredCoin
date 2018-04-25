@@ -11,3 +11,6 @@ typedef struct sBlockChain {
   BlockList blocklist;        //Liste des blocks
   BlockList lastBlockList;    //Dernier block
 } *BlockChain;
+
+
+// Block Genesis
