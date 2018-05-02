@@ -92,8 +92,6 @@ Block GenBlock(Block prevBlock){
   Block temp = malloc(sizeof * (struct sBlock));
 
   temp->index = prevBlock->index + 1;
-  temp->nbTransaction = 0;
-
   temp->hashPrevious = prevBlock->hashCurrent;
 
   return temp;
