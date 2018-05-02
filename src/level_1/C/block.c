@@ -14,24 +14,24 @@ struct sBlock{
 
   int nonce;                    //Nombre pseudo aléatoire et unique
 
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+} *Block;
 
 char* getTimeStamp(){
   return ctime(time(NULL));
+}
+
+bool miningOK (char* hashTemp, int difficulty){
+  for(int i; i < difficulty){
+    if(hashTemp[i] != '0'){
+      return false;
+    }
+  }
+  return true;
+}
+
+
+char* miningBlock(Block blockTemp){
+
 }
 
 Block GenesisBlock(){
@@ -46,7 +46,10 @@ Block GenesisBlock(){
   temp->transactionList = malloc(sizeof * (char[7]));
   temp->transactionList[0] = "Genesis";
 
-  //temp->hashMerkleRoot = getMerkleRoot(temp->transactionList, 1);
+  temp->hashMerkleRoot = getMerkleRoot(temp->transactionList, 1);
+  temp->hashPrevious = 0;
   //temp->hashCurrent = fonction de hash
-  //temp->hashPrevious = fonction de hash
+
+
+  return temp;
 }
