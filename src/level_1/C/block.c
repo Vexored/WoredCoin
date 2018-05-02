@@ -1,5 +1,9 @@
 #include "block.h"
 
+#define MAX_BLOCK 3 //nb de caract du Nombre
+#define TIMESTAMP_SIZE
+
+
 struct sBlock{
 
   int index;                      //Numéro du BlockList
@@ -14,7 +18,7 @@ struct sBlock{
 
   int nonce;                    //Nombre pseudo aléatoire et unique
 
-} *Block;
+};
 
 char* getTimeStamp(){
   return ctime(time(NULL));
@@ -31,7 +35,12 @@ bool miningOK (char* hashTemp, int difficulty){
 
 
 char* miningBlock(Block blockTemp){
+  //concaténer les infos du block -> Taille + malloc
 
+  int sizeConcat = MAX_BLOCK + TIMESTAMP_SIZE + MAX_TRANSACTION + TRANSACTION_SIZE*blocktemp->nbTransaction + HASH_SIZE*2 + MAX_NONCE;
+
+  
+  // Hash le block a l'infini
 }
 
 Block GenesisBlock(){
