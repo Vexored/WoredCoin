@@ -10,7 +10,7 @@ struct sBlock{
   char timeStamp[TIMESTAMP_SIZE+1]; //Horodatage du block
 
   int nbTransaction;              //Nombre de transaction
-  char* transactionList[NB_TRANSACTION_MAX];         //Liste des transactions
+  char** transactionList;         //Liste des transactions
 
   char hashMerkleRoot[HASH_SIZE+1]; //Hash root de l'arbre de Merkle des transactions
   char hashCurrent[HASH_SIZE+1];    //Hash du block courant
@@ -93,9 +93,7 @@ Block GenBlock(Block prevBlock){
   temp->index = prevBlock->index + 1;
   temp->nbTransaction = 0;
 
-  temp->transactionList = malloc(sizeof(char));
-
   temp->hashPrevious = prevBlock->hashCurrent;
 
-  return temp;  
+  return temp;
 }
