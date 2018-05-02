@@ -20,5 +20,6 @@ typedef struct sBlock *Block;
 
 //Fonction
 char* getTimeStamp();
+bool miningOK(char* hasTemp, int difficulty);
 char* miningBlock(Block blockTemp);
 Block GenesisBlock();
