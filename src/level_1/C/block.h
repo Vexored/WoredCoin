@@ -23,3 +23,4 @@ char* getTimeStamp();
 bool miningOK(char* hasTemp, int difficulty);
 char* miningBlock(Block blockTemp);
 Block GenesisBlock();
+Block GenBlock(Block prevBlock);

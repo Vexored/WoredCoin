@@ -83,3 +83,19 @@ Block GenesisBlock(){
 
   return temp;
 }
+
+Block GenBlock(Block prevBlock){
+
+  char *timeStamp = genTimeStamp();
+
+  Block temp = malloc(sizeof * (struct sBlock));
+
+  temp->index = prevBlock->index + 1;
+  temp->nbTransaction = 0;
+
+  temp->transactionList = malloc(sizeof(char));
+
+  temp->hashPrevious = prevBlock->hashCurrent;
+
+  return temp;  
+}
