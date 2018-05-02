@@ -82,7 +82,6 @@ Block GenesisBlock(){
   temp->hashPrevious = 0;
   //temp->hashCurrent = fonction de hash
 
-
   return temp;
 }
 
