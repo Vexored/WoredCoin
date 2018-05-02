@@ -21,7 +21,9 @@ struct sBlock{
 };
 
 char* getTimeStamp(){
-  return ctime(time(NULL));
+  time_t ltime;
+  time(&ltime);
+  return ctime(&ltime);
 }
 
 bool miningOK (char* hashTemp, int difficulty){
