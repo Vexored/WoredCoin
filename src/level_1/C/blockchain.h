@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-
+#include "block.h"
 
 //Structure Block
 typedef struct sBlocList *BlockList;

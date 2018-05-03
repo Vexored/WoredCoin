@@ -39,20 +39,20 @@ bool miningOK (char* hashTemp, int difficulty){
 
 void miningBlock(Block blockTemp, int difficulty){
   //concaténer les infos du block -> Taille + malloc
-  int sizeConcat = MAX_BLOCK + TIMESTAMP_SIZE + MAX_TRANSACTION + TRANSACTION_SIZE*blocktemp->nbTransaction + HASH_SIZE*2 + MAX_NONCE;
-  char* hashBlock[HASH_SIZE + 1];
+  int sizeConcat = MAX_BLOCK + TIMESTAMP_SIZE + MAX_TRANSACTION + TRANSACTION_SIZE*blockTemp->nbTransaction + HASH_SIZE*2 + MAX_NONCE;
+  char hashBlock[HASH_SIZE + 1];
   char* tabConcat = malloc( (sizeConcat + 1) * sizeof(char));
   char* tabConcatNonce = malloc( (sizeConcat + 1) * sizeof(char));
   //Concaténation
-  snprinft(tabConcat, sizeof(tabConcat), "%d%s%d", blockTemp->index, blockTemp->timeStamp, blockTemp->nbTransaction);
+  snprintf(tabConcat, sizeof(tabConcat), "%d%s%d", blockTemp->index, blockTemp->timeStamp, blockTemp->nbTransaction);
   for(int i = 0; i < blockTemp->nbTransaction; i++){
-    snprintt(tabConcat, sizeof(tabConcat), "%s", blockTemp->transactionList[i]);
+    snprintf(tabConcat, sizeof(tabConcat), "%s", blockTemp->transactionList[i]);
   }
-  blockTemp->hashMerkleRoot = getMerkelRoot(blockTemp->transactionList, blockTemp->nbTransaction);
+  strcpy(blockTemp->hashMerkleRoot, getMerkelRoot(blockTemp->transactionList, blockTemp->nbTransaction));
   snprintf(tabConcat, sizeof(tabConcat), "%s", blockTemp->hashMerkleRoot);
   snprintf(tabConcat, sizeof(tabConcat), "%s", blockTemp->hashPrevious);
 
-  int nonce = 0,
+  int nonce = 0;
 
   while(1){
     tabConcatNonce = tabConcat;
@@ -63,14 +63,14 @@ void miningBlock(Block blockTemp, int difficulty){
     }
     nonce++;
   }
-  blockTemp->hashCurrent = hashBlock;
+  strcpy(blockTemp->hashCurrent, hashBlock);
   blockTemp->nonce = nonce;
 }
 
 bool blockIsValid(Block blockTemp){
 
   char* hashBlock[HASH_SIZE + 1];
-  hashBlock = getMerkelRoot(blockTemp->transactionList, blockTemp->nbTransaction);
+  strcpy(hashBlock, getMerkelRoot(blockTemp->transactionList, blockTemp->nbTransaction));
   if(blockTemp->hashMerkleRoot == hashBlock){
     return true;
   }
@@ -79,18 +79,20 @@ bool blockIsValid(Block blockTemp){
 
 Block GenesisBlock(){
 
-  char *timeStamp = genTimeStamp();
+  char* timeStamp = getTimeStamp();
 
-  Block temp = malloc(sizeof * (struct sBlock));
+  Block temp = malloc(sizeof(struct sBlock));
 
   temp->index = 0;
   temp->nbTransaction = 1;
 
-  temp->transactionList = malloc(sizeof * (char[7]));
+  temp->transactionList = malloc(sizeof(char)*7);
   temp->transactionList[0] = "Genesis";
+  strcpy(temp->timeStamp,timeStamp);
 
-  temp->hashMerkleRoot = getMerkleRoot(temp->transactionList, 1);
-  temp->hashPrevious = 0;
+
+  strcpy(temp->hashMerkleRoot, getMerkleRoot(temp->transactionList, 1));
+  strcpy(temp->hashPrevious, "0");
   //temp->hashCurrent = fonction de hash
 
   return temp;
@@ -98,12 +100,13 @@ Block GenesisBlock(){
 
 Block GenBlock(Block prevBlock){
 
-  char *timeStamp = genTimeStamp();
+  char *timeStamp = getTimeStamp();
 
-  Block temp = malloc(sizeof * (struct sBlock));
+  Block temp = malloc(sizeof(struct sBlock));
 
   temp->index = prevBlock->index + 1;
-  temp->hashPrevious = prevBlock->hashCurrent;
+  strcpy(temp->timeStamp, timeStamp);
+  strcpy(temp->hashPrevious, prevBlock->hashCurrent);
 
   return temp;
 }

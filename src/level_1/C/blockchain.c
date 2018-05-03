@@ -5,12 +5,12 @@
 #include <stdbool.h>
 #include "blockchain.h"
 
-typedef struct sBlockList {
+struct sBlockList {
   Block block;                //Block
   struct sBlockList *next;    //Pointeur vers prochain block
 };
 
-typedef struct sBlockChain {
+struct sBlockChain {
   int nbBlocks;               //Nombre de nbBlock
   int difficulty;             //Difficulté de la blockchain
   BlockList blocklist;        //Liste des blocks
@@ -35,7 +35,7 @@ BlockChain genBlockChain(int difficulty){
   BlockChain blockChain = malloc(sizeof(struct sBlockList));
   blockChain->nbBlocks = 1;
   blockChain->difficulty = difficulty;
-  blockChain->blocklist = genBlockList();
+  blockChain->blocklist = genBlockList(firstBlock(blockChain));
   blockChain->lastBlockList = blockChain->blocklist;
 
   return blockChain;
@@ -49,7 +49,7 @@ void addBlock(BlockChain blockChain, Block block){
 }
 
 bool chainIsValid(BlockChain blockChain){
-
+  return true;
 }
 
 // Block Genesis

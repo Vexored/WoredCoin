@@ -35,10 +35,10 @@ blockchain.o: blockchain.c
 transaction.o: transaction.c
 	$(CC) -o transaction.o -c transaction.c $(CFLAGS)
 
-merkle.o: merkle.c
-	$(CC) -o merkle.o -c merkle.c $(CFLAGS)
+merkle.o: merkel.c
+	$(CC) -o merkel.o -c merkel.c $(CFLAGS)
 
-main.o: main.c block.h blockchain.h transaction.h merkle.h
+main.o: main.c block.h blockchain.h transaction.h merkel.h
 	$(CC) -o main.o -c main.c $(CFLAGS)
 
 # On utilise .PHONY au cas où clean ou mrproper soient également des nom de fichiers présents dans le répertoire

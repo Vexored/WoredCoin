@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include "merkel.h"
+#include "sha256_utils.h"
 
 
 //Constante
@@ -25,7 +27,7 @@ typedef struct sBlock *Block;
 //Fonction
 char* getTimeStamp();
 bool miningOK(char* hasTemp, int difficulty);
-char* miningBlock(Block blockTemp);
+void miningBlock(Block blockTemp, int difficulty);
 Block GenesisBlock();
 Block GenBlock(Block prevBlock);
 
