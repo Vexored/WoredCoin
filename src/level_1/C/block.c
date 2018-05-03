@@ -66,6 +66,16 @@ void miningBlock(Block blockTemp, int difficulty){
   blockTemp->Nonce = nonce;
 }
 
+bool blockIsValid(Block blockTemp){
+
+  char* hashBlock[HASH_SIZE + 1];
+  hashBlock = getMerkelRoot(blockTemp->transactionList, blockTemp->nbTransaction);
+  if(blockTemp->hashMerkleRoot == hashBlock){
+    return true;
+  }
+  return false;
+}
+
 Block GenesisBlock(){
 
   char *timeStamp = genTimeStamp();
