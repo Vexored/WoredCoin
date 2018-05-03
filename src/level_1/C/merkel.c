@@ -5,9 +5,9 @@ typedef	unsigned char	BYTE ;	/* 8-bit data */
 //Fonction de control
 char* getMerkelRoot(char** tabTransaction, int nbTransaction){
 
-  char** tabHash = malloc(nbTransaction * (sizeof*(char*)));
-  for(int i = 0; i < nbTransaction: ++i){
-    tabHash[i] = malloc(HASH_SIZE * (sizeof*(char)) + 2);
+  char** tabHash = malloc(nbTransaction * (sizeof(char*)));
+  for(int i = 0; i < nbTransaction; ++i){
+    tabHash[i] = malloc(HASH_SIZE * (sizeof(char)) + 2);
   }
   //Hashage de chaque transaction si impair on duplique la dernière case du tableau
   for(int i = 0; i < nbTransaction; ++i){

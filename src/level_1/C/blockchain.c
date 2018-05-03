@@ -1,4 +1,4 @@
-#define "blockchain.h"
+#include "blockchain.h"
 
 typedef struct sBlockList {
   Block block;                //Block
@@ -13,9 +13,9 @@ typedef struct sBlockChain {
   //BlockList firstBlockList;
 } *BlockChain;
 
-Block firstBlock(){
+Block firstBlock(BlockChain blockChain){
   Block first = GenesisBlock();
-  miningBlock(first, difficulty);
+  miningBlock(first, blockChain->difficulty);
   return first;
 }
 
@@ -31,7 +31,7 @@ BlockChain genBlockChain(int difficulty){
   blockChain->nbBlocks = 1;
   blockChain->difficulty = difficulty;
   blockChain->blocklist = genBlockList();
-  bloackChain->lastBlockList = blockChain->blocklist;
+  blockChain->lastBlockList = blockChain->blocklist;
 
   return blockChain;
 
@@ -43,5 +43,8 @@ void addBlock(BlockChain blockChain, Block block){
   ++(blockChain->nbBlocks);
 }
 
+bool chainIsValid(BlockChain blockChain){
+
+}
 
 // Block Genesis

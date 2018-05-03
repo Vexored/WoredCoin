@@ -1,9 +1,5 @@
 #include "block.h"
 
-#define MAX_BLOCK 3 //nb de caract du Nombre
-#define TIMESTAMP_SIZE
-
-
 struct sBlock{
 
   int index;                      //Numéro du BlockList
@@ -27,7 +23,7 @@ char* getTimeStamp(){
 }
 
 bool miningOK (char* hashTemp, int difficulty){
-  for(int i; i < difficulty){
+  for(int i; i < difficulty; ++i){
     if(hashTemp[i] != '0'){
       return false;
     }
@@ -63,7 +59,7 @@ void miningBlock(Block blockTemp, int difficulty){
     nonce++;
   }
   blockTemp->hashCurrent = hashBlock;
-  blockTemp->Nonce = nonce;
+  blockTemp->nonce = nonce;
 }
 
 bool blockIsValid(Block blockTemp){

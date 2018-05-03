@@ -6,7 +6,7 @@ LDFLAGS=
 EXEC=main
 SRC= $(wildcard *.c)
 HEADERS= $(wildcard *.h)
-OBJ= $(SRC:.cpp=.o)
+OBJ= $(SRC:.c=.o)
 # à mettre à vide si on veut paramétrer
 # les dépendances pour chaque source
 DEPENDENCY_FOR_ALL= $(HEADERS)

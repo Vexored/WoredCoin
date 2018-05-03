@@ -1,6 +1,4 @@
-#include transaction.h
-
-
+#include "transaction.h"
 
 void genTransaction(Block block){
 
