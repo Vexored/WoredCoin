@@ -1,9 +1,14 @@
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
 #include "blockchain.h"
 
 typedef struct sBlockList {
   Block block;                //Block
   struct sBlockList *next;    //Pointeur vers prochain block
-} *BlockList;
+};
 
 typedef struct sBlockChain {
   int nbBlocks;               //Nombre de nbBlock
@@ -11,7 +16,7 @@ typedef struct sBlockChain {
   BlockList blocklist;        //Liste des blocks
   BlockList lastBlockList;    //Dernier block
   //BlockList firstBlockList;
-} *BlockChain;
+};
 
 Block firstBlock(BlockChain blockChain){
   Block first = GenesisBlock();

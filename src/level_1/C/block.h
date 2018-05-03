@@ -1,3 +1,7 @@
+#ifndef BLOCK_H
+#define BLOCK_H
+
+
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
@@ -24,3 +28,5 @@ bool miningOK(char* hasTemp, int difficulty);
 char* miningBlock(Block blockTemp);
 Block GenesisBlock();
 Block GenBlock(Block prevBlock);
+
+#endif /* !BLOCK_H */

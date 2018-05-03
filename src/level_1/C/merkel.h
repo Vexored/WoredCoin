@@ -1,3 +1,6 @@
+#ifndef MERKEL_H
+#define MERKEL_H
+
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
@@ -8,3 +11,5 @@
 #define HASH_SIZE 32
 
 char* getMerkelRoot(char** tabTransaction, int nbTransaction);
+
+#endif /* !MERKEL_H */
