@@ -1,36 +1,57 @@
-# variables à modifier pour personaliser
-# la compilation
-CPP=gcc
-CXXFLAGS=
+# Specific part of the Makefile
+# EXEC contient le nom des exécutables à générer, le nom est indépendant des noms de fichiers auquels le makefile fait appel
+EXEC = main
+# Begin generic part of the Makefile
+# CC indique le compilateur utilisé
+CC=gcc
+# CFLAGS regroupe les options de compilation (par exemple "-Werror" transforme les Warning en Error, ne produit pas d'exécutable)
+CFLAGS=-std=c99 -Wextra -Wall -pedantic
+# LDFLAGS regroupe les options de l'édition de liens
 LDFLAGS=
-EXEC=main
+
+# SRC contient la liste des fichiers sources et OBJ contient la liste des fichiers objets
 SRC= $(wildcard *.c)
-HEADERS= $(wildcard *.h)
-OBJ= $(SRC:.c=.o)
-# à mettre à vide si on veut paramétrer
-# les dépendances pour chaque source
-DEPENDENCY_FOR_ALL= $(HEADERS)
+OBJ= $(SRC:.c =.o)
 
-# d'autres cibles peuvent être rajoutées
-all: $(EXEC)
+ifeq ($(DEBUG), yes)
+	CFLAGS += -g
+	LDFLAGS =
+else
+	CFLAGS += -O3 -DNDEBUG
+	LDFLAGS =
+endif
 
-# génération de l'exécutable
-$(EXEC): $(OBJ)
-	$(CPP) -o $@ $^ $(LDFLAGS)
+all : $(EXEC)
 
-# génération des fichiers .o
-%.o: %.c $(DEPENDENCY_FOR_ALL)
-	$(CPP) -o $@ -c $< $(CXXFLAGS)
+$(EXEC): block.o blockchain.o transaction.o merkle.o main.o
+	$(CC) -o main block.o blockchain.o transaction.o merkle.o main.o $(LDFLAGS)
 
-# il est possible de paramétrer les
-# dépendances pour chaque fichier source
-# si DEPENDENCY_FOR_ALL est vide
+block.o: block.c
+	$(CC) -o block.o -c block.c $(CFLAGS)
 
-#quelques actions de base
+blockchain.o: blockchain.c
+	$(CC) -o blockchain.o -c blockchain.c $(CFLAGS)
+
+transaction.o: transaction.c
+	$(CC) -o transaction.o -c transaction.c $(CFLAGS)
+
+merkle.o: merkle.c
+	$(CC) -o merkle.o -c merkle.c $(CFLAGS)
+
+main.o: main.c block.h blockchain.h transaction.h merkle.h
+	$(CC) -o main.o -c main.c $(CFLAGS)
+
+# On utilise .PHONY au cas où clean ou mrproper soient également des nom de fichiers présents dans le répertoire
 .PHONY: clean mrproper
 
+# Permet de supprimer tous les fichiers intermédiaires
 clean:
-	rm -rf *.o
+	@rm -rf *.o
 
+#Permet de supprimer tout ce qui a été généré par le makefile
 mrproper: clean
-	rm -rf $(EXEC)
+	@rm -rf $(EXEC)
+# End generic part of the makefile
+
+# List of target dependencies
+main.o: block.h blockchain.h transaction.h merkle.h
