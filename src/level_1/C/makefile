@@ -23,8 +23,8 @@ endif
 
 all : $(EXEC)
 
-$(EXEC): block.o blockchain.o transaction.o merkle.o main.o
-	$(CC) -o main block.o blockchain.o transaction.o merkle.o main.o $(LDFLAGS)
+$(EXEC): block.o blockchain.o transaction.o merkel.o sha256.o sha256_utils.o main.o
+	$(CC) -o main block.o blockchain.o transaction.o merkel.o sha256.o sha256_utils.o main.o $(LDFLAGS)
 
 block.o: block.c
 	$(CC) -o block.o -c block.c $(CFLAGS)
@@ -35,10 +35,16 @@ blockchain.o: blockchain.c
 transaction.o: transaction.c
 	$(CC) -o transaction.o -c transaction.c $(CFLAGS)
 
-merkle.o: merkel.c
+merkel.o: merkel.c
 	$(CC) -o merkel.o -c merkel.c $(CFLAGS)
 
-main.o: main.c block.h blockchain.h transaction.h merkel.h
+sha256.o: sha256.c
+	$(CC) -o sha256.o -c sha256.c $(CFLAGS)
+
+sha256_utils.o: sha256_utils.c
+	$(CC) -o sha256_utils.o -c sha256_utils.c $(CFLAGS)
+
+main.o: main.c block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h
 	$(CC) -o main.o -c main.c $(CFLAGS)
 
 # On utilise .PHONY au cas où clean ou mrproper soient également des nom de fichiers présents dans le répertoire
@@ -54,4 +60,10 @@ mrproper: clean
 # End generic part of the makefile
 
 # List of target dependencies
-main.o: block.h blockchain.h transaction.h merkle.h
+main.o: block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h
+block.o: block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h
+blockchain.o: block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h
+transaction.o: block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h
+merkel.o: block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h
+sha256.o: block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h
+sha256_utils.o: block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h

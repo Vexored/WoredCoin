@@ -9,14 +9,15 @@
 #include "block.h"
 
 //Structure Block
-typedef struct sBlocList *BlockList;
+typedef struct sBlockList BlockList;
 //Structure Block
-typedef struct sBlockChain *BlockChain;
+typedef struct sBlockChain BlockChain;
 
 
-Block firstBlock();
-BlockList genBlockList(Block block);
-BlockChain genBlockChain(int difficulty);
-void addBlock(BlockChain blockChain, Block block);
+Block* firstBlock(int difficulty);
+BlockList* genBlockList(Block* block);
+BlockChain* genBlockChain(int difficulty);
+void addBlock(BlockChain* blockChain, Block* block);
+Block* getLastBlock(BlockChain* blockChain);
 
 #endif /* !BLOCKCHAIN_H */

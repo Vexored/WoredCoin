@@ -6,7 +6,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include "sha256.h"
+#include "sha256_utils.h"
+#include "block.h"
 
 #define HASH_SIZE 32
 

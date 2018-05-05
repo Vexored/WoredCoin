@@ -14,21 +14,38 @@
 //Constante
 #define MAX_BLOCK 3 //nb de caract du Nombre
 #define TIMESTAMP_SIZE 25 //nb de caract du timeStamp
-#define MAX_TRANSACTION 100 //nb max de transaction
+#define MAX_TRANSACTION 10 //nb max de transaction
 #define MAX_TRANSACTION_CHAR 3 //nb de caract du Nombre de Transaction
-#define TRANSACTION_SIZE 32 // Taille de la chaine de caractère d'une transaction
+#define TRANSACTION_SIZE 30 // Taille de la chaine de caractère d'une transaction
 #define HASH_SIZE 32 //Taille du hash
 #define MAX_NONCE 9999999 //Nonce max
 #define MAX_NONCE_CHAR 10 //Nb caract max de la nonce
+#define MAX_VALUE_RAND 1000
+
+typedef struct sBlock{
+
+  int index;                      //Numéro du BlockList
+  char timeStamp[TIMESTAMP_SIZE+1]; //Horodatage du block
+
+  int nbTransaction;              //Nombre de transaction
+  char** transactionList;         //Liste des transactions
+
+  char* hashMerkleRoot; //Hash root de l'arbre de Merkle des transactions
+  char* hashCurrent;    //Hash du block courant
+  char* hashPrevious;   //Hash du block précèdent
+
+  int nonce;                      //Nombre pseudo aléatoire et unique
+
+}Block;
 
 //Structure Block
-typedef struct sBlock *Block;
+//typedef struct sBlock Block;
 
 //Fonction
 char* getTimeStamp();
 bool miningOK(char* hasTemp, int difficulty);
-void miningBlock(Block blockTemp, int difficulty);
-Block GenesisBlock();
-Block GenBlock(Block prevBlock);
+void miningBlock(Block* blockTemp, int difficulty);
+Block* GenesisBlock();
+Block* GenBlock(Block* prevBlock);
 
 #endif /* !BLOCK_H */

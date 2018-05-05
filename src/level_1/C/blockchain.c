@@ -6,49 +6,55 @@
 #include "blockchain.h"
 
 struct sBlockList {
-  Block block;                //Block
+  Block* block;                //Block
   struct sBlockList *next;    //Pointeur vers prochain block
 };
 
 struct sBlockChain {
   int nbBlocks;               //Nombre de nbBlock
   int difficulty;             //Difficulté de la blockchain
-  BlockList blocklist;        //Liste des blocks
-  BlockList lastBlockList;    //Dernier block
+  BlockList *blocklist;        //Liste des blocks
+  BlockList *lastBlockList;    //Dernier block
   //BlockList firstBlockList;
 };
 
-Block firstBlock(BlockChain blockChain){
-  Block first = GenesisBlock();
-  miningBlock(first, blockChain->difficulty);
+Block* firstBlock(int difficulty){
+  Block* first = GenesisBlock();
+  miningBlock(first, difficulty);
   return first;
 }
 
-BlockList genBlockList(Block block){
-  BlockList bl = malloc(sizeof(struct sBlockList));
+BlockList* addBlockList(Block* block){
+
+  BlockList* bl = (BlockList*)malloc(sizeof(struct sBlockList));
 	bl->block = block;
 	bl->next = NULL;
 	return bl;
 }
 
-BlockChain genBlockChain(int difficulty){
-  BlockChain blockChain = malloc(sizeof(struct sBlockList));
+BlockChain* genBlockChain(int difficulty){
+  BlockChain *blockChain = malloc(sizeof(struct sBlockList));
   blockChain->nbBlocks = 1;
   blockChain->difficulty = difficulty;
-  blockChain->blocklist = genBlockList(firstBlock(blockChain));
+  blockChain->blocklist = addBlockList(firstBlock(difficulty));
   blockChain->lastBlockList = blockChain->blocklist;
-
   return blockChain;
 
 }
 
-void addBlock(BlockChain blockChain, Block block){
-  blockChain->lastBlockList->next = genBlockList(block);
+Block* getLastBlock(BlockChain* blockChain){
+  return blockChain->lastBlockList->block;
+}
+
+void addBlock(BlockChain* blockChain, Block* block){
+  printf("genBlocklist");
+  blockChain->lastBlockList->next = addBlockList(block);
+  printf("Add réussi \n");
   blockChain->lastBlockList = blockChain->lastBlockList->next;
   ++(blockChain->nbBlocks);
 }
 
-bool chainIsValid(BlockChain blockChain){
+bool chainIsValid(BlockChain* blockChain){
   return true;
 }
 
