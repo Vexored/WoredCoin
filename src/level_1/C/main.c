@@ -9,43 +9,26 @@
 #include "block.h"
 #include "transaction.h"
 
-int main(int argc, char *argv) {
+int main(int argc, char **argv) {
 
   printf("Creation de la BlockChain...\n");
-  BlockChain* test = genBlockChain(2);
+  BlockChain* test = genBlockChain(4);
+
   printf("BlockChain créé.\n");
+  int i = 0;
+  while(i<2000){
 
-  printf("\nBlock 1\n");
+  printf("\n\n\n#### BLOCK %d\n", getLastBlock(test)->index);
+
   addBlock(test, GenBlock(getLastBlock(test)));
+  printf("hashPrevious = %s\n", getLastBlock(test)->hashPrevious);
   genTransaction(getLastBlock(test));
-  miningBlock(getLastBlock(test), 2);
-  printf("timeStamp = %s\n", getLastBlock(test)->timeStamp);
+  miningBlock(getLastBlock(test), 5);
   printf("hashMerkleRoot = %s\n", getLastBlock(test)->hashMerkleRoot);
   printf("hashPrevious = %s\n", getLastBlock(test)->hashPrevious);
   printf("hashCurrent = %s\n", getLastBlock(test)->hashCurrent);
-  printf("Index Block = %d\n", getLastBlock(test)->index);
-
-  printf("\nBlock 2\n");
-  addBlock(test, GenBlock(getLastBlock(test)));
-  printf("test\n");
-  /*genTransaction(getLastBlock(test));
-  printf("test\n");
-  miningBlock(getLastBlock(test), 2);
-  printf("timeStamp = %s\n", getLastBlock(test)->timeStamp);
-  printf("hashMerkleRoot = %s\n", getLastBlock(test)->hashMerkleRoot);
-  printf("hashPrevious = %s\n", getLastBlock(test)->hashPrevious);
-  printf("hashCurrent = %s\n", getLastBlock(test)->hashCurrent);
-  printf("Index Block = %d\n", getLastBlock(test)->index);
-
-  printf("\nBlock 3\n");
-  addBlock(test, GenBlock(getLastBlock(test)));
-  genTransaction(getLastBlock(test));
-  miningBlock(getLastBlock(test), 2);
-  printf("timeStamp = %s\n", getLastBlock(test)->timeStamp);
-  printf("hashMerkleRoot = %s\n", getLastBlock(test)->hashMerkleRoot);
-  printf("hashPrevious = %s\n", getLastBlock(test)->hashPrevious);
-  printf("hashCurrent = %s\n", getLastBlock(test)->hashCurrent);
-  printf("Index Block = %d\n", getLastBlock(test)->index);*/
+  i++;
+}
 
   return 0;
 }

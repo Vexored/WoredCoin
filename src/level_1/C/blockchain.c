@@ -20,7 +20,7 @@ struct sBlockChain {
 
 Block* firstBlock(int difficulty){
   Block* first = GenesisBlock();
-  miningBlock(first, difficulty);
+  miningBlock(first, 0);
   return first;
 }
 
@@ -47,9 +47,7 @@ Block* getLastBlock(BlockChain* blockChain){
 }
 
 void addBlock(BlockChain* blockChain, Block* block){
-  printf("genBlocklist");
   blockChain->lastBlockList->next = addBlockList(block);
-  printf("Add réussi \n");
   blockChain->lastBlockList = blockChain->lastBlockList->next;
   ++(blockChain->nbBlocks);
 }

@@ -12,7 +12,7 @@
 char* getMerkelRoot(char** tabTransaction, int nbTransaction){
   char** tabHash = malloc((nbTransaction+1) * (sizeof(char*)));
   for(int i = 0; i < nbTransaction + 1; ++i){
-    tabHash[i] = malloc((HASH_SIZE + 1) * (sizeof(char)));
+    tabHash[i] = malloc(((HASH_SIZE) + 1) * (sizeof(char)));
   }
   //Hashage de chaque transaction si impair on duplique la dernière case du tableau
   for(int i = 0; i < nbTransaction; ++i){
