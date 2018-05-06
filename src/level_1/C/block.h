@@ -29,7 +29,7 @@ typedef struct sBlock Block;
 int getIndexBlock(Block* blockTemp);
 void setIndexBlock(Block* blockTemp, int index);
 char* getTimeStampBlock(Block* blockTemp);
-void setTimeStampBlock(Block* blockTemp, char timeStamp);
+void setTimeStampBlock(Block* blockTemp, char* timeStamp);
 int getNbTransationBlock(Block* blockTemp);
 void setNbTransactionBlock(Block* blockTemp, int nb);
 char** getListTransationBlock(Block* blockTemp);

@@ -13,11 +13,11 @@
 int main(int argc, char **argv) {
 
   printf("Creation de la BlockChain...\n");
-  BlockChain* test = genBlockChain(2);
+  BlockChain* test = genBlockChain(4);
 
   printf("BlockChain créé.\n");
   int i = 0;
-  while(i<10){
+  while(i<1000){
 
 
   addBlock(test, GenBlock(getLastBlock(test)));
@@ -25,7 +25,7 @@ int main(int argc, char **argv) {
 
   printf("hashPrevious = %s\n", getHashPrevious(getLastBlock(test)));
   genTransaction(getLastBlock(test));
-  miningBlock(getLastBlock(test), 2);
+  miningBlock(getLastBlock(test), getDifficulty(test));
   printf("hashMerkleRoot = %s\n", getHashMerkleRoot(getLastBlock(test)));
   printf("hashPrevious = %s\n", getHashPrevious(getLastBlock(test)));
   printf("hashCurrent = %s\n", getHashCurrent(getLastBlock(test)));

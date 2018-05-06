@@ -31,7 +31,7 @@ void setIndexBlock(Block* blockTemp, int index){
 char* getTimeStampBlock(Block* blockTemp){
   return blockTemp->timeStamp;
 }
-void setTimeStampBlock(Block* blockTemp, char timeStamp){
+void setTimeStampBlock(Block* blockTemp, char* timeStamp){
   strcpy(blockTemp->timeStamp, timeStamp);
 }
 
@@ -52,7 +52,7 @@ void setListTransactionBlock(Block* blockTemp, char** transaction){
 }
 
 char* getListTransationBlockI(Block* blockTemp, int index){
-  return blockTemp->transactionList;
+  return blockTemp->transactionList[index];
 }
 
 void setListTransactionBlocIk(Block* blockTemp, char* transaction, int index){
@@ -250,12 +250,12 @@ Block* GenesisBlock(){
   Block *temp = (Block*) malloc(sizeof(struct sBlock));
 
   setIndexBlock(temp, 0);
-  //setNbTransactionBlock(temp, 1);
-  //char* transactionTemp = malloc(sizeof(char)*8);
-  //transactionTemp[0] = "Genesis";
-  //setListTransactionBlock(temp, transactionTemp);
-  //setTimeStampBlock(temp, timeStamp);
-  //setHashPrevious(temp, "0");
+  setNbTransactionBlock(temp, 1);
+  char** transactionTemp = malloc(sizeof(char)*8);
+  transactionTemp[0] = "Genesis";
+  setListTransactionBlock(temp, transactionTemp);
+  setTimeStampBlock(temp, timeStamp);
+  setHashPrevious(temp, "0");
 
   return temp;
 
