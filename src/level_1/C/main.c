@@ -8,6 +8,7 @@
 #include "blockchain.h"
 #include "block.h"
 #include "transaction.h"
+#include "cheater.h"
 
 int main(int argc, char **argv) {
 
@@ -30,14 +31,9 @@ int main(int argc, char **argv) {
   printf("hashCurrent = %s\n", getLastBlock(test)->hashCurrent);
   i++;
   }
-  Block* testB = getBlockInChain(test, 5);
-  testB->nonce = 3;
-  printf("\n\n\n#### BLOCK %d IS CORRECT ?\n", testB->index);
-  if(blockIsValid(testB, 2) == true){
-    printf("YES\n");
-  }
-  else{
-    printf("NO\n");
-  }
+  chainIsValid(test);
+  alteredRemoveBlock(test, 3);
+  chainIsValid(test);
+
   return 0;
 }

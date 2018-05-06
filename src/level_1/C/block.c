@@ -102,6 +102,14 @@ bool blockIsValid(Block* blockTemp, int difficulty){
   return false;
 }
 
+bool merkleIsValid(Block* blockTemp){
+  if(strcmp(blockTemp->hashMerkleRoot, getMerkelRoot(blockTemp->transactionList, blockTemp->nbTransaction)) == 0){
+    return true;
+  }
+  return false;
+}
+
+
 Block* GenesisBlock(){
 
   char* timeStamp = getTimeStamp();
@@ -130,18 +138,4 @@ Block* GenBlock(Block* prevBlock){
   temp->hashPrevious = prevBlock->hashCurrent;
 
   return temp;
-}
-
-bool BlockIsValide(char* hashPrev, Block* blockCurrent){
-  /*if(strcmp(blockCurrent->hashMerkleRoot, getMerkelRoot(blockCurrent->transactionList, blockCurrent->nbTransaction)){
-    if(strcmp(hashPrev, blockCurrent->hashPrevious)){
-      //On vérifie le hash courant
-      strcpy(hashTest, blockCurrent->hashCurrent);
-      if(strcmp(hashTest, miningBlock(blockChain->blocklist->block, 0))){
-        printf("Block valide\n");
-        return true;
-      }
-    }
-  }
-  return false;*/
 }

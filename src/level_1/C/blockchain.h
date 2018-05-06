@@ -20,6 +20,10 @@ BlockChain* genBlockChain(int difficulty);
 BlockList* genBlockList(Block* block);
 Block* getLastBlock(BlockChain* blockChain);
 void addBlock(BlockChain* blockChain, Block* block);
+void removeBlock(BlockChain* blockChain, int indexBlock);
+bool chainIsValid(BlockChain* blockChain);
 Block* getBlockInChain(BlockChain* blockChain, int index);
+int getNbBlock(BlockChain* blockChain);
+int getDifficulty(BlockChain* blockChain);
 
 #endif /* !BLOCKCHAIN_H */

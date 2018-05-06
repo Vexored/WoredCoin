@@ -32,6 +32,8 @@ BlockList* addBlockList(Block* block){
 	return bl;
 }
 
+
+
 BlockChain* genBlockChain(int difficulty){
   BlockChain *blockChain = malloc(sizeof(struct sBlockList));
   blockChain->nbBlocks = 1;
@@ -52,30 +54,36 @@ void addBlock(BlockChain* blockChain, Block* block){
   ++(blockChain->nbBlocks);
 }
 
-/*bool chainIsValid(BlockChain* blockChain){
-  //Vérification du génésis
-  char* hashTest[HASH_SIZE*2 + 1];
-  if(blockChain->blocklist->block->index == 0 && strcmp(blockChain->blocklist->block->hashPrevious, "0")){
-    //On vérifie ça contenance:
-    if(blockChain->blocklist->block->nbTransaction == 1 && strcmp(blockChain->blocklist->block->transactionList[0], "Genesis") == 0){
-      //On vérifie MERKLE
-      if(strcmp(blockChain->blocklist->block->hashMerkleRoot, getMerkelRoot(blockChain->blocklist->block->transactionList, blockChain->blocklist->block->nbTransaction) == 0){
-        //On vérifie le hash courant
-        strcpy(hashTest, blockChain->blocklist->block->hashCurrent);
-        if(strcmp(hashTest, miningBlock(blockChain->blocklist->block, 0))){
-          printf("Genesis valide\n");
+void removeBlock(BlockChain* blockChain, int indexBlock){
+  BlockList* bl = blockChain->blocklist;
+  BlockList* bl2 = blockChain->blocklist;
+  int nbBlocks = blockChain->nbBlocks;
 
-        }
-      }
+  for(int i = 0; i < indexBlock - 1; i++){
+    if(i < nbBlocks){
+      bl = bl->next;
+    }
+    else{
+      break;
     }
   }
-  for(int i = 1; i<blockChain->nbBlocks; ++i){
-    Block blockTemp = getBlockChain(blockChain, i);
-    if(BlockIsValide(hashTemp, blockTemp) != true){
-      return false;
+  for(int i = 0; i < indexBlock + 1; i++){
+    if(i < nbBlocks){
+      bl2 = bl2->next;
+    }
+    else{
+      break;
     }
   }
-}*/
+
+  bl->next = bl2;
+  blockChain->lastBlockList->next = bl;
+  blockChain->lastBlockList = blockChain->lastBlockList->next;
+  blockChain->nbBlocks = blockChain->nbBlocks - 1;
+
+}
+
+
 
 Block* getBlockInChain(BlockChain* blockChain, int index){
   BlockList* bl = blockChain->blocklist;
@@ -91,4 +99,43 @@ Block* getBlockInChain(BlockChain* blockChain, int index){
   }
   return bl->block;
 }
+
+bool chainIsValid(BlockChain* blockChain){
+  //Vérification du génésis
+  char* hashTest[HASH_SIZE*2 + 1];
+  if(blockChain->blocklist->block->index == 0 && strcmp(blockChain->blocklist->block->hashPrevious, "0") == 0){
+    //On vérifie ça contenance:
+    if(blockChain->blocklist->block->nbTransaction == 1 && strcmp(blockChain->blocklist->block->transactionList[0], "Genesis") == 0){
+      //On vérifie MERKLE
+      if(blockIsValid(getBlockInChain(blockChain, 0), blockChain->difficulty) != true){
+        return false;
+      }else{
+      printf("GENESIS VALIDE\n");
+    }
+  }else{
+        printf("GENESIS INVALIDE");}
+      }
+
+
+  for(int i = 1; i<blockChain->nbBlocks; ++i){
+    Block* temp = getBlockInChain(blockChain, i);
+    strcpy(temp->hashPrevious, getBlockInChain(blockChain, i - 1)->hashCurrent);
+    if(blockIsValid(getBlockInChain(blockChain, i), blockChain->difficulty) != true){
+      printf("\n\n\n#### BLOCK %d IS NOT CORRECT \n", getBlockInChain(blockChain, i)->index);
+      return false;
+    }
+    printf("\n\n\n#### BLOCK %d IS CORRECT \n", getBlockInChain(blockChain, i)->index);
+
+  }
+  return true;
+}
+
+int getNbBlock(BlockChain* blockChain){
+  return blockChain->nbBlocks;
+}
+
+int getDifficulty(BlockChain* blockChain){
+  return blockChain->difficulty;
+}
+
 // Block Genesis
