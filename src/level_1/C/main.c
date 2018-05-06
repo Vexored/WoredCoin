@@ -21,14 +21,14 @@ int main(int argc, char **argv) {
 
 
   addBlock(test, GenBlock(getLastBlock(test)));
-  printf("\n\n\n#### BLOCK %d\n", getLastBlock(test)->index);
+  printf("\n\n\n#### BLOCK %d\n", getIndexBlock(getLastBlock(test)));
 
-  printf("hashPrevious = %s\n", getLastBlock(test)->hashPrevious);
+  printf("hashPrevious = %s\n", getHashPrevious(getLastBlock(test)));
   genTransaction(getLastBlock(test));
   miningBlock(getLastBlock(test), 2);
-  printf("hashMerkleRoot = %s\n", getLastBlock(test)->hashMerkleRoot);
-  printf("hashPrevious = %s\n", getLastBlock(test)->hashPrevious);
-  printf("hashCurrent = %s\n", getLastBlock(test)->hashCurrent);
+  printf("hashMerkleRoot = %s\n", getHashMerkleRoot(getLastBlock(test)));
+  printf("hashPrevious = %s\n", getHashPrevious(getLastBlock(test)));
+  printf("hashCurrent = %s\n", getHashCurrent(getLastBlock(test)));
   i++;
   }
   chainIsValid(test);

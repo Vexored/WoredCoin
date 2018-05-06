@@ -12,6 +12,7 @@
 
 void alteredTransactionBlock(BlockChain* blockChain, Block* blockTemp, int removeTransaction);
 void alteredRemoveBlock(BlockChain* blockChain, int index);
+void cheatingHash(BlockChain* blockChain, int index);
 
 
 

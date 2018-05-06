@@ -21,24 +21,31 @@
 #define MAX_NONCE 9999999 //Nonce max
 #define MAX_NONCE_CHAR 10 //Nb caract max de la nonce
 
-typedef struct sBlock{
-
-  int index;                      //Numéro du BlockList
-  char timeStamp[TIMESTAMP_SIZE+1]; //Horodatage du block
-
-  int nbTransaction;              //Nombre de transaction
-  char** transactionList;         //Liste des transactions
-
-  char* hashMerkleRoot; //Hash root de l'arbre de Merkle des transactions
-  char* hashCurrent;    //Hash du block courant
-  char* hashPrevious;   //Hash du block précèdent
-
-  int nonce;                      //Nombre pseudo aléatoire et unique
-
-}Block;
+typedef struct sBlock Block;
 
 //Structure Block
 //typedef struct sBlock Block;
+
+int getIndexBlock(Block* blockTemp);
+void setIndexBlock(Block* blockTemp, int index);
+char* getTimeStampBlock(Block* blockTemp);
+void setTimeStampBlock(Block* blockTemp, char timeStamp);
+int getNbTransationBlock(Block* blockTemp);
+void setNbTransactionBlock(Block* blockTemp, int nb);
+char** getListTransationBlock(Block* blockTemp);
+void setListTransactionBlock(Block* blockTemp, char** transaction);
+char* getListTransationBlockI(Block* blockTemp, int index);
+
+void setListTransactionBlocIk(Block* blockTemp, char* transaction, int index);
+
+char* getHashMerkleRoot(Block* blockTemp);
+void setHashMerkleRoot(Block* blockTemp, char* hash);
+char* getHashPrevious(Block* blockTemp);
+void setHashPrevious(Block* blockTemp, char* hash);
+char* getHashCurrent(Block* blockTemp);
+void setHashCurrent(Block* blockTemp, char* hash);
+int getNonceBlock(Block* blockTemp);
+void setNonceBlock(Block* blockTemp, int nonce);
 
 //Fonction
 char* getTimeStamp();

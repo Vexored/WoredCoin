@@ -19,6 +19,8 @@ void genTransaction(Block* block){
     sprintf(tab_Transaction[i], "%s%d", "Source-Destination: ", rand()%MAX_VALUE_RAND);
         //strcat(tab_Transaction[i], buffer);
   }
-  block->nbTransaction = nb_Transaction;
-  block->transactionList = tab_Transaction;
+  //block->nbTransaction = nb_Transaction;
+  //block->transactionList = tab_Transaction;
+  setNbTransactionBlock(block, nb_Transaction);
+  setListTransactionBlock(block, tab_Transaction);
 }
