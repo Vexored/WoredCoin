@@ -65,31 +65,50 @@ void miningBlock(Block* blockTemp, int difficulty){
   }
   blockTemp->hashCurrent = hashBlock;
   blockTemp->nonce = nonce;
-  //Concaténation
-    /*int nonce = 0;
-  char Buffer2[sizeConcat + 1];
-  while(1){
-    tabConcatNonce = tabConcat;
-    sprintf(Buffer2, "%d", nonce);
-    strcat(tabConcat, Buffer2);
-    sha256ofString((BYTE*)tabConcatNonce, hashBlock);
-    if(miningOK(hashBlock, difficulty) ==true){
-      break;
-    }
-    nonce = nonce + 1;
-  }
-  */
 }
 
-/*bool blockIsValid(Block* blockTemp){
+bool blockIsValid(Block* blockTemp, int difficulty){
 
-  char* hashBlock[HASH_SIZE + 1];
-  strcpy(hashBlock, getMerkelRoot(blockTemp->transactionList, blockTemp->nbTransaction));
-  if(blockTemp->hashMerkleRoot == hashBlock){
+
+  //concaténer les infos du block -> Taille + malloc
+  int sizeConcat = MAX_BLOCK + TIMESTAMP_SIZE + MAX_TRANSACTION + (TRANSACTION_SIZE)*blockTemp->nbTransaction + (HASH_SIZE)*2 + MAX_NONCE_CHAR;
+
+  char* hashBlock = malloc((HASH_SIZE + 1)*sizeof(char));
+  char* tabConcat = malloc( (sizeConcat + 1) * sizeof(char));
+
+  char IndexToString[MAX_BLOCK];
+  char NbTransToString[MAX_TRANSACTION];
+  char NonceToString[MAX_NONCE_CHAR];
+
+  sprintf(IndexToString, "%d", blockTemp->index);
+  sprintf(NbTransToString, "%d", blockTemp->nbTransaction);
+
+  strcpy(tabConcat, IndexToString);
+  strcat(tabConcat, blockTemp->timeStamp);
+  strcat(tabConcat, NbTransToString);
+
+  for(int i = 0; i < blockTemp->nbTransaction; i++){
+    strcat(tabConcat, blockTemp->transactionList[i]);
+  }
+  getMerkelRoot(blockTemp->transactionList, blockTemp->nbTransaction);
+  strcat(tabConcat, getMerkelRoot(blockTemp->transactionList, blockTemp->nbTransaction));
+  strcat(tabConcat, blockTemp->hashPrevious);
+  sprintf(NonceToString, "%d", blockTemp->nonce);
+  strcat(tabConcat, NonceToString);
+  sha256ofString((BYTE*)tabConcat, hashBlock);
+  if(strcmp(hashBlock, blockTemp->hashCurrent) == 0){
     return true;
   }
   return false;
-}*/
+}
+
+bool merkleIsValid(Block* blockTemp){
+  if(strcmp(blockTemp->hashMerkleRoot, getMerkelRoot(blockTemp->transactionList, blockTemp->nbTransaction)) == 0){
+    return true;
+  }
+  return false;
+}
+
 
 Block* GenesisBlock(){
 

@@ -44,6 +44,8 @@ typedef struct sBlock{
 char* getTimeStamp();
 bool miningOK(char* hasTemp, int difficulty);
 void miningBlock(Block* blockTemp, int difficulty);
+bool blockIsValid(Block* blockTemp, int difficulty);
+bool merkleIsValid(Block* blockTemp);
 Block* GenesisBlock();
 Block* GenBlock(Block* prevBlock);
 

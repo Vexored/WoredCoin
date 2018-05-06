@@ -8,27 +8,32 @@
 #include "blockchain.h"
 #include "block.h"
 #include "transaction.h"
+#include "cheater.h"
 
 int main(int argc, char **argv) {
 
   printf("Creation de la BlockChain...\n");
-  BlockChain* test = genBlockChain(4);
+  BlockChain* test = genBlockChain(2);
 
   printf("BlockChain créé.\n");
   int i = 0;
-  while(i<2000){
+  while(i<10){
 
-  printf("\n\n\n#### BLOCK %d\n", getLastBlock(test)->index);
 
   addBlock(test, GenBlock(getLastBlock(test)));
+  printf("\n\n\n#### BLOCK %d\n", getLastBlock(test)->index);
+
   printf("hashPrevious = %s\n", getLastBlock(test)->hashPrevious);
   genTransaction(getLastBlock(test));
-  miningBlock(getLastBlock(test), 5);
+  miningBlock(getLastBlock(test), 2);
   printf("hashMerkleRoot = %s\n", getLastBlock(test)->hashMerkleRoot);
   printf("hashPrevious = %s\n", getLastBlock(test)->hashPrevious);
   printf("hashCurrent = %s\n", getLastBlock(test)->hashCurrent);
   i++;
-}
+  }
+  chainIsValid(test);
+  alteredRemoveBlock(test, 3);
+  chainIsValid(test);
 
   return 0;
 }
