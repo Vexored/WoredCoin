@@ -5,12 +5,12 @@
 #include <stdbool.h>
 #include "cheater.h"
 
-/*void alteredTransactionBlock(Block* blockTemp, int removeTransaction){
+void alteredTransactionBlock(BlockChain* blockChain, Block* blockTemp, int removeTransaction){
   printf("Supprésion de la transaction %d du block %s\n", removeTransaction, blockTemp->index);
   for(int i = removeTransaction; i < blockTemp->nbTransaction - 1; ++i){
       strcpy(blockTemp->transactionList[i], blockTemp->transactionList[i + 1]);
   }
-  prinft("Recalculs des hash de la chaine...\n");
+  printf("Recalculs des hash de la chaine...\n");
   blockTemp->nbTransaction = blockTemp->nbTransaction - 1;
   for(int i = blockTemp->index; i < getNbBlock(blockChain); ++i){
     Block* temp1 = getBlockInChain(blockChain, i);
@@ -23,7 +23,7 @@
     printf("hashCurrent = %s\n", temp1->hashCurrent);
   }
   printf("finish\n");
-}*/
+}
 
 void alteredRemoveBlock(BlockChain* blockChain, int index){
   printf("Supprésion d du block %d\n", index);
