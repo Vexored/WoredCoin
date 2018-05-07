@@ -9,9 +9,12 @@
 #include <stdbool.h>
 #include "merkel.h"
 #include "sha256_utils.h"
+#include "config.h"
+
+//#include "process.h"
 
 
-//Constante
+/*//Constante
 #define MAX_BLOCK 3 //nb de caract du Nombre
 #define TIMESTAMP_SIZE 25 //nb de caract du timeStamp
 #define MAX_TRANSACTION 100 //nb max de transaction
@@ -19,7 +22,7 @@
 #define TRANSACTION_SIZE 30 // Taille de la chaine de caractère d'une transaction
 #define HASH_SIZE 64 //Taille du hash
 #define MAX_NONCE 9999999 //Nonce max
-#define MAX_NONCE_CHAR 10 //Nb caract max de la nonce
+#define MAX_NONCE_CHAR 10 //Nb caract max de la nonce*/
 
 typedef struct sBlock Block;
 
@@ -36,7 +39,7 @@ char** getListTransationBlock(Block* blockTemp);
 void setListTransactionBlock(Block* blockTemp, char** transaction);
 char* getListTransationBlockI(Block* blockTemp, int index);
 
-void setListTransactionBlocIk(Block* blockTemp, char* transaction, int index);
+void setListTransactionBlockI(Block* blockTemp, char* transaction, int index);
 
 char* getHashMerkleRoot(Block* blockTemp);
 void setHashMerkleRoot(Block* blockTemp, char* hash);
@@ -51,9 +54,9 @@ void setNonceBlock(Block* blockTemp, int nonce);
 char* getTimeStamp();
 bool miningOK(char* hasTemp, int difficulty);
 void miningBlock(Block* blockTemp, int difficulty);
-bool blockIsValid(Block* blockTemp, int difficulty);
-bool merkleIsValid(Block* blockTemp);
+bool blockIsValid(Block* blockTemp);
+//bool merkleIsValid(Block* blockTemp);
 Block* GenesisBlock();
 Block* GenBlock(Block* prevBlock);
-
+void freeBlockTransI(Block* temp, int i);
 #endif /* !BLOCK_H */

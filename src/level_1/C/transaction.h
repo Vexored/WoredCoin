@@ -7,8 +7,10 @@
 #include <string.h>
 #include <stdbool.h>
 #include "block.h"
+#include "config.h"
+//#include "process.h"
 
-#define MAX_VALUE_RAND 1000000
+
 
 void genTransaction(Block* block);
 

@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <time.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdbool.h>
 #include "block.h"
 
 struct sBlock{
@@ -55,7 +50,7 @@ char* getListTransationBlockI(Block* blockTemp, int index){
   return blockTemp->transactionList[index];
 }
 
-void setListTransactionBlocIk(Block* blockTemp, char* transaction, int index){
+void setListTransactionBlockI(Block* blockTemp, char* transaction, int index){
   blockTemp->transactionList[index] = transaction;
 }
 
@@ -109,6 +104,8 @@ bool miningOK (char* hashTemp, int difficulty){
 
 
 void miningBlock(Block* blockTemp, int difficulty){
+
+  //printf("######%d\n\n", getIndexBlock(blockTemp));
   //concaténer les infos du block -> Taille + malloc
   int sizeConcat = MAX_BLOCK + TIMESTAMP_SIZE + MAX_TRANSACTION + (TRANSACTION_SIZE)*getNbTransationBlock(blockTemp) + (HASH_SIZE)*2 + MAX_NONCE_CHAR;
 
@@ -155,39 +152,7 @@ void miningBlock(Block* blockTemp, int difficulty){
   setNonceBlock(blockTemp, nonce);
 }
 
-bool blockIsValid(Block* blockTemp, int difficulty){
-
-
-  /*//concaténer les infos du block -> Taille + malloc
-  int sizeConcat = MAX_BLOCK + TIMESTAMP_SIZE + MAX_TRANSACTION + (TRANSACTION_SIZE)*blockTemp->nbTransaction + (HASH_SIZE)*2 + MAX_NONCE_CHAR;
-
-  char* hashBlock = malloc((HASH_SIZE + 1)*sizeof(char));
-  char* tabConcat = malloc( (sizeConcat + 1) * sizeof(char));
-
-  char IndexToString[MAX_BLOCK];
-  char NbTransToString[MAX_TRANSACTION];
-  char NonceToString[MAX_NONCE_CHAR];
-
-  sprintf(IndexToString, "%d", blockTemp->index);
-  sprintf(NbTransToString, "%d", blockTemp->nbTransaction);
-
-  strcpy(tabConcat, IndexToString);
-  strcat(tabConcat, blockTemp->timeStamp);
-  strcat(tabConcat, NbTransToString);
-
-  for(int i = 0; i < blockTemp->nbTransaction; i++){
-    strcat(tabConcat, blockTemp->transactionList[i]);
-  }
-  getMerkelRoot(blockTemp->transactionList, blockTemp->nbTransaction);
-  strcat(tabConcat, getMerkelRoot(blockTemp->transactionList, blockTemp->nbTransaction));
-  strcat(tabConcat, blockTemp->hashPrevious);
-  sprintf(NonceToString, "%d", getNonce->nonce);
-  strcat(tabConcat, NonceToString);
-  sha256ofString((BYTE*)tabConcat, hashBlock);
-  if(strcmp(hashBlock, getHashCurrent(blockTemp)) == 0){
-    return true;
-  }
-  return false;*/
+bool blockIsValid(Block* blockTemp){
 
   //concaténer les infos du block -> Taille + malloc
   int sizeConcat = MAX_BLOCK + TIMESTAMP_SIZE + MAX_TRANSACTION + (TRANSACTION_SIZE)*getNbTransationBlock(blockTemp) + (HASH_SIZE)*2 + MAX_NONCE_CHAR;
@@ -222,29 +187,7 @@ bool blockIsValid(Block* blockTemp, int difficulty){
 }
 
 
-bool merkleIsValid(Block* blockTemp){
-  if(strcmp(getHashMerkleRoot(blockTemp), getMerkelRoot(getListTransationBlock(blockTemp), getNbTransationBlock(blockTemp))) == 0){
-    return true;
-  }
-  return false;
-}
-
-
 Block* GenesisBlock(){
-
-  /*char* timeStamp = getTimeStamp();
-
-  Block* temp = malloc(sizeof(struct sBlock));
-
-  temp->index = 0;
-  temp->nbTransaction = 1;
-
-  temp->transactionList = malloc(sizeof(char)*8);
-  temp->transactionList[0] = "Genesis";
-  strcpy(temp->timeStamp,timeStamp);
-  temp->hashPrevious = "0";
-
-  return temp;*/
 
   char* timeStamp = getTimeStamp();
   Block *temp = (Block*) malloc(sizeof(struct sBlock));
@@ -263,16 +206,6 @@ Block* GenesisBlock(){
 
 Block* GenBlock(Block* prevBlock){
 
-  /*char *timeStamp = getTimeStamp();
-
-  Block* temp = (Block*) malloc(sizeof(struct sBlock));
-
-  temp->index = prevBlock->index + 1;
-  strcpy(temp->timeStamp, timeStamp);
-  temp->hashPrevious = prevBlock->hashCurrent;
-
-  return temp;*/
-
   char* timeStamp = getTimeStamp();
   Block *temp = (Block*) malloc(sizeof(struct sBlock));
   setIndexBlock(temp, getIndexBlock(prevBlock) + 1);
@@ -280,4 +213,9 @@ Block* GenBlock(Block* prevBlock){
   setHashPrevious(temp, getHashCurrent(prevBlock));
 
   return temp;
+}
+
+void freeBlockTransI(Block* temp, int i){
+  printf("JE VAIS FREE %d", i);
+  free(temp->transactionList[i]);
 }

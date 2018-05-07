@@ -7,6 +7,9 @@
 #include <string.h>
 #include <stdbool.h>
 #include "block.h"
+#include "config.h"
+
+//#include "process.h"
 
 //Structure Block
 typedef struct sBlockList BlockList;
@@ -14,14 +17,15 @@ typedef struct sBlockList BlockList;
 typedef struct sBlockChain BlockChain;
 
 
-Block* firstBlock(int difficulty);
+Block* firstBlock();
 BlockList* addBlockList(Block* block);
-BlockChain* genBlockChain(int difficulty);
+BlockChain* createBlockChain(int difficulty);
 BlockList* genBlockList(Block* block);
 Block* getLastBlock(BlockChain* blockChain);
 void addBlock(BlockChain* blockChain, Block* block);
 void removeBlock(BlockChain* blockChain, int indexBlock);
 bool chainIsValid(BlockChain* blockChain);
+bool merkleIsValid(BlockChain* blockChain);
 Block* getBlockInChain(BlockChain* blockChain, int index);
 int getNbBlock(BlockChain* blockChain);
 int getDifficulty(BlockChain* blockChain);

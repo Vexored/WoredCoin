@@ -23,8 +23,8 @@ endif
 
 all : $(EXEC)
 
-$(EXEC): block.o blockchain.o transaction.o cheater.o merkel.o sha256.o sha256_utils.o main.o
-	$(CC) -o main block.o blockchain.o transaction.o cheater.o merkel.o sha256.o sha256_utils.o main.o $(LDFLAGS)
+$(EXEC): block.o blockchain.o transaction.o cheater.o merkel.o sha256.o sha256_utils.o process.o main.o
+	$(CC) -o main block.o blockchain.o transaction.o cheater.o merkel.o sha256.o sha256_utils.o process.o main.o $(LDFLAGS)
 
 block.o: block.c
 	$(CC) -o block.o -c block.c $(CFLAGS)
@@ -47,7 +47,10 @@ sha256.o: sha256.c
 sha256_utils.o: sha256_utils.c
 	$(CC) -o sha256_utils.o -c sha256_utils.c $(CFLAGS)
 
-main.o: main.c block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h cheater.h
+process.o: process.c
+	$(CC) -o process.o -c process.c $(CFLAGS)
+
+main.o: main.c block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h cheater.h process.h config.h
 	$(CC) -o main.o -c main.c $(CFLAGS)
 
 # On utilise .PHONY au cas où clean ou mrproper soient également des nom de fichiers présents dans le répertoire
@@ -63,11 +66,12 @@ mrproper: clean
 # End generic part of the makefile
 
 # List of target dependencies
-main.o: block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h cheater.h
-block.o: block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h cheater.h
-blockchain.o: block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h cheater.h
-transaction.o: block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h cheater.h
-merkel.o: block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h cheater.h
-sha256.o: block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h cheater.h
-sha256_utils.o: block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h cheater.h
-cheater.o: block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h cheater.h cheater.h
+main.o: block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h cheater.h process.h config.h
+block.o: block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h cheater.h process.h config.h
+blockchain.o: block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h cheater.h process.h config.h
+transaction.o: block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h cheater.h process.h config.h
+merkel.o: block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h cheater.h process.h config.h
+sha256.o: block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h cheater.h process.h config.h
+sha256_utils.o: block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h cheater.h process.h config.h
+cheater.o: block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h cheater.h cheater.h process.h process.h config.h
+process.o: block.h blockchain.h transaction.h merkel.h sha256.h sha256_utils.h cheater.h cheater.h process.h process.h config.h

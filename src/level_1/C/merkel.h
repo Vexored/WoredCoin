@@ -8,6 +8,10 @@
 #include <stdbool.h>
 #include "sha256_utils.h"
 #include "block.h"
+#include "config.h"
+
+//#include "process.h"
+
 
 
 char* getMerkelRoot(char** tabTransaction, int nbTransaction);
