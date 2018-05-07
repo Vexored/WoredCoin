@@ -5,7 +5,7 @@ EXEC = main
 # CC indique le compilateur utilisé
 CC=gcc
 # CFLAGS regroupe les options de compilation (par exemple "-Werror" transforme les Warning en Error, ne produit pas d'exécutable)
-CFLAGS=-std=c99 -Wextra -Wall -pedantic
+CFLAGS=-std=c99
 # LDFLAGS regroupe les options de l'édition de liens
 LDFLAGS=
 
