@@ -1,3 +1,6 @@
+# WoredCoin _ Level_1
+# Programme C
+
 Notice du Logiciel du WoredCoin 0.1:
 
 Commande: ./woredCoin -b (bombreDeBlock) -d (difficulté) -cb (Optionnel -> supprime le block n°x) -ct (Optionnel -> supprime la transaction n°x NECCESSITE -cb)
