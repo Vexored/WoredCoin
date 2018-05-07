@@ -6,11 +6,11 @@ struct sBlock{
   char timeStamp[TIMESTAMP_SIZE+1]; //Horodatage du block
 
   int nbTransaction;              //Nombre de transaction
-  char** transactionList;         //Liste des transactions
+  char** transactionList[MAX_TRANSACTION][TRANSACTION_SIZE];         //Liste des transactions
 
-  char* hashMerkleRoot; //Hash root de l'arbre de Merkle des transactions
-  char* hashCurrent;    //Hash du block courant
-  char* hashPrevious;   //Hash du block précèdent
+  char* hashMerkleRoot[HASH_SIZE*2 + 1]; //Hash root de l'arbre de Merkle des transactions
+  char* hashCurrent[HASH_SIZE*2 + 1];    //Hash du block courant
+  char* hashPrevious[HASH_SIZE*2 + 1];   //Hash du block précèdent
 
   int nonce;                      //Nombre pseudo aléatoire et unique
 
@@ -194,7 +194,7 @@ Block* GenesisBlock(){
 
   setIndexBlock(temp, 0);
   setNbTransactionBlock(temp, 1);
-  char** transactionTemp = malloc(sizeof(char)*8);
+  //char** transactionTemp = malloc(sizeof(char)*8);
   transactionTemp[0] = "Genesis";
   setListTransactionBlock(temp, transactionTemp);
   setTimeStampBlock(temp, timeStamp);
