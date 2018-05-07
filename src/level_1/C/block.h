@@ -14,6 +14,7 @@
 
 typedef struct sBlock Block;
 
+//Fonction accès structure block, beaucoup inutile.
 int getIndexBlock(Block* blockTemp);
 void setIndexBlock(Block* blockTemp, int index);
 char* getTimeStampBlock(Block* blockTemp);
@@ -23,9 +24,7 @@ void setNbTransactionBlock(Block* blockTemp, int nb);
 char** getListTransationBlock(Block* blockTemp);
 void setListTransactionBlock(Block* blockTemp, char** transaction);
 char* getListTransationBlockI(Block* blockTemp, int index);
-
 void setListTransactionBlockI(Block* blockTemp, char* transaction, int index);
-
 char* getHashMerkleRoot(Block* blockTemp);
 void setHashMerkleRoot(Block* blockTemp, char* hash);
 char* getHashPrevious(Block* blockTemp);
@@ -40,7 +39,6 @@ char* getTimeStamp();
 bool miningOK(char* hasTemp, int difficulty);
 void miningBlock(Block* blockTemp, int difficulty);
 bool blockIsValid(Block* blockTemp);
-//bool merkleIsValid(Block* blockTemp);
 Block* GenesisBlock();
 Block* GenBlock(Block* prevBlock);
 void freeBlockTransI(Block* temp, int i);

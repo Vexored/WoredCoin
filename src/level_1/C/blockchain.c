@@ -100,7 +100,6 @@ Block* getBlockInChain(BlockChain* blockChain, int index){
 
 bool chainIsValid(BlockChain* blockChain){
   //Vérification du génésis
-  //printf("getIndexBlock(blockChain->blocklist->block) %d", getIndexBlock(blockChain->blocklist->block));
   if(getIndexBlock(blockChain->blocklist->block) == 0 && strcmp(getHashPrevious(blockChain->blocklist->block), "0") == 0){
     //On vérifie ça contenance:
     if(getNbTransationBlock(blockChain->blocklist->block) == 1 && strcmp(getListTransationBlock(blockChain->blocklist->block)[0], "Genesis") == 0){
@@ -114,10 +113,9 @@ bool chainIsValid(BlockChain* blockChain){
         printf("### BLOCK GENESIS IS NOT CORRECT\n");}
   }
 
-
+//Vérifacation des ordres blocks.
   for(int i = 1; i<blockChain->nbBlocks; ++i){
     Block* temp = getBlockInChain(blockChain, i);
-    //strcpy(temp->hashPrevious, getBlockInChain(blockChain, i - 1)->hashCurrent);
     setHashPrevious(temp,getHashCurrent(getBlockInChain(blockChain, i - 1)));
     if(blockIsValid(getBlockInChain(blockChain, i)) != true){
       printf("#### BLOCK %d IS NOT CORRECT ###\n", i);
@@ -148,5 +146,3 @@ int getNbBlock(BlockChain* blockChain){
 int getDifficulty(BlockChain* blockChain){
   return blockChain->difficulty;
 }
-
-// Block Genesis

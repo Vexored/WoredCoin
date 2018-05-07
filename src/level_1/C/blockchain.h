@@ -9,14 +9,12 @@
 #include "block.h"
 #include "config.h"
 
-//#include "process.h"
-
 //Structure Block
 typedef struct sBlockList BlockList;
 //Structure Block
 typedef struct sBlockChain BlockChain;
 
-
+//Fonction
 Block* firstBlock();
 BlockList* addBlockList(Block* block);
 BlockChain* createBlockChain(int difficulty);

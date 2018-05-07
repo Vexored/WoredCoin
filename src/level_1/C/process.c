@@ -6,10 +6,6 @@ void createBlock(BlockChain* temp){
   miningBlock(getLastBlock(temp), getDifficulty(temp));
 }
 
-void printBlockMining(Block* blockTemp){
-  printf("### BLOCK -> %d ### NB TRANSACTION -> %d\n### HASH MERKLE ROOT -> %s\n### HASH CURRENT -> %s\n### MINER EN xx\n\n", getIndexBlock(blockTemp), getNbTransationBlock(blockTemp), getHashMerkleRoot(blockTemp), getHashCurrent(blockTemp));
-}
-
 void printBlock(Block* blockTemp){
   printf("### BLOCK -> %d ### NB TRANSACTION -> %d\n### HASH PREV -> %s \n### HASH MERKLE ROOT -> %s\n### HASH CURRENT -> %s\n\n", getIndexBlock(blockTemp), getNbTransationBlock(blockTemp), getHashPrevious(blockTemp), getHashMerkleRoot(blockTemp), getHashCurrent(blockTemp));
 }
@@ -24,7 +20,7 @@ void printBlockChain(BlockChain* blockChain){
 }
 
 bool verifBlockChain(BlockChain* blockChain){
-  printf("### VERIFICATION DE LA COHERENCE DE LA BLOCKCHAIN ###\n");
+  printf("\n### VERIFICATION DE LA COHERENCE DE LA BLOCKCHAIN ###\n\n");
   if(chainIsValid(blockChain) == true){
     printf("\n### LA BLOCKCHAIN EST COHERENTE ###\n\n");
     return true;
@@ -47,9 +43,19 @@ bool verifHashRoot(BlockChain* blockChain){
   }
 }
 
-void hackBlockChain(BlockChain* blockChain, int i, int transaction){
+int hackBlockChain(BlockChain* blockChain, int i, int transaction){
   printf("### CHEATER OF BLOCKCHAIN ###\n");
-  if(transaction > -1){
+  if(transaction > 0){
+    if(i < getNbBlock(blockChain)){
+      if(transaction > getNbTransationBlock(getBlockInChain(blockChain, i))){
+        printf("Le block ne contient pas la transaction demandé.\n");
+        return 0;
+      }
+    }
+    else {
+      printf("Impossible ! Le numéro du block demander a cheater ne serra pas créé, nombre de block créé inférieur.\n");
+      return 0;
+    }
     printf("### SUPPRESSION LA TRANSACTION n°%d DU BLOCK n°%d ###\n", transaction, i);
     printf("### RECALCUL DE TOUT LES HASHS DES BLOCKS A PARTIR DU BLOCK n°%d DE LA BLOCKCHAIN ###\n", i);
 
@@ -61,35 +67,40 @@ void hackBlockChain(BlockChain* blockChain, int i, int transaction){
     temps = (float)(t2-t1)/CLOCKS_PER_SEC;
     printf("### FIN DU CALCUL DE TOUT LES HASHS DES BLOCKS DE LA BLOCKCHAIN EN %fs ###\n",temps);
     verifBlockChain(blockChain);
+    return 1;
   }
   else{
+    if( i > getNbBlock(blockChain)){
+      printf("Impossible ! Le numéro du block demander a cheater ne serra pas créé, nombre de block créé inférieur.\n");
+      return 0;
+    }
     printf("### SUPPRESSION DU BLOCK n°%d ###\n", i);
     printf("### RECALCUL DE TOUT LES HASHS DES BLOCKS A PARTIR DU BLOCK n°%d DE LA BLOCKCHAIN ###\n", i);
-
     float temps;
     clock_t t1, t2;
     t1 = clock();
     alteredRemoveBlock(blockChain, i);
-
     t2 = clock();
     temps = (float)(t2-t1)/CLOCKS_PER_SEC;
     printf("### FIN DU CALCUL DE TOUT LES HASHS DES BLOCKS DE LA BLOCKCHAIN EN %fs ###\n",temps);
     verifBlockChain(blockChain);
+    return 1;
   }
 }
-//cheater
 
 BlockChain* genBlockChain(int difficulty, int nbBlock){
   printf("### GENERATION BLOCKCHAIN ###\n");
-  //Genération de blockchain + génésis
+  float temps;
+  clock_t t1, t2;
+  t1 = clock();
   BlockChain* temp = createBlockChain(difficulty);
-  //Génération x block
-
   for(int i  = 0; i < nbBlock; ++i){
     printf("### GENERATION BLOCK n° %d ###\n", i + 1);
     createBlock(temp);
     printBlock(getLastBlock(temp));
   }
-  printf("### GENERATION BLOCKCHAIN TERMINEE ###\n\n");
+  t2 = clock();
+  temps = (float)(t2-t1)/CLOCKS_PER_SEC;
+  printf("### GENERATION BLOCKCHAIN TERMINEE EN %fs ###\n\n", temps);
   return temp;
 }

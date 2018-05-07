@@ -174,7 +174,6 @@ bool blockIsValid(Block* blockTemp){
   for(int i = 0; i < getNbTransationBlock(blockTemp); i++){
     strcat(tabConcat, getListTransationBlockI(blockTemp, i));
   }
-  //getMerkelRoot(blockTemp->transactionList, blockTemp->nbTransaction);
   strcat(tabConcat, getMerkelRoot(getListTransationBlock(blockTemp), getNbTransationBlock(blockTemp)));
   strcat(tabConcat, getHashPrevious(blockTemp));
   sprintf(NonceToString, "%d", getNonceBlock(blockTemp));

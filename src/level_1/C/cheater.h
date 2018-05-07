@@ -10,8 +10,6 @@
 #include "blockchain.h"
 #include "config.h"
 
-//#include "process.h"
-
 void alteredTransactionBlock(BlockChain* blockChain, Block* blockTemp, int removeTransaction);
 void alteredRemoveBlock(BlockChain* blockChain, int index);
 

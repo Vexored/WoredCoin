@@ -8,9 +8,6 @@
 #include <stdbool.h>
 #include "block.h"
 #include "config.h"
-//#include "process.h"
-
-
 
 void genTransaction(Block* block);
 

@@ -17,13 +17,16 @@
 #include "sha256_utils.h"
 #include "config.h"
 
-void createBlock(BlockChain* temp);
-void printBlockMining(Block* blockTemp);
-void printBlock(Block* blockTemp);
+
 void printBlockChain(BlockChain* blockChain);
-bool verifBlockChain(BlockChain* blockChain);
-bool verifHashRoot(BlockChain* blockChain);
-void hackBlockChain(BlockChain* blockChain, int i, int transaction);
+int hackBlockChain(BlockChain* blockChain, int i, int transaction);
 BlockChain* genBlockChain(int difficulty, int nbBlock);
+
+//Fonction pour pouvoir rajouter des actions plus spécifique. Pas utile dans l'état actuel du programme.
+
+//void createBlock(BlockChain* temp);
+//void printBlock(Block* blockTemp);
+//bool verifBlockChain(BlockChain* blockChain);
+//bool verifHashRoot(BlockChain* blockChain);
 
 #endif /* !PROCESS_H */
