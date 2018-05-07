@@ -10,10 +10,6 @@
 #include "block.h"
 #include "config.h"
 
-//#include "process.h"
-
-
-
 char* getMerkelRoot(char** tabTransaction, int nbTransaction);
 
 #endif /* !MERKEL_H */
