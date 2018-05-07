@@ -44,7 +44,7 @@ bool verifHashRoot(BlockChain* blockChain){
 }
 
 int hackBlockChain(BlockChain* blockChain, int i, int transaction){
-  printf("### CHEATER OF BLOCKCHAIN ###\n");
+  printf("### CHEATER OF BLOCKCHAIN ###\n\n");
   if(transaction > 0){
     if(i < getNbBlock(blockChain)){
       if(transaction > getNbTransationBlock(getBlockInChain(blockChain, i))){
@@ -58,14 +58,14 @@ int hackBlockChain(BlockChain* blockChain, int i, int transaction){
     }
     printf("### SUPPRESSION LA TRANSACTION n°%d DU BLOCK n°%d ###\n", transaction, i);
     printf("### RECALCUL DE TOUT LES HASHS DES BLOCKS A PARTIR DU BLOCK n°%d DE LA BLOCKCHAIN ###\n", i);
-
     float temps;
     clock_t t1, t2;
     t1 = clock();
     alteredTransactionBlock(blockChain, getBlockInChain(blockChain, i), transaction);
     t2 = clock();
     temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-    printf("### FIN DU CALCUL DE TOUT LES HASHS DES BLOCKS DE LA BLOCKCHAIN EN %fs ###\n",temps);
+    printf("### FIN DU CALCUL DE TOUT LES HASHS DES BLOCKS DE LA BLOCKCHAIN EN %fs ###\n\n",temps);
+    printf("### CHEAT TERMINER ###\n");
     verifBlockChain(blockChain);
     return 1;
   }
@@ -82,14 +82,15 @@ int hackBlockChain(BlockChain* blockChain, int i, int transaction){
     alteredRemoveBlock(blockChain, i);
     t2 = clock();
     temps = (float)(t2-t1)/CLOCKS_PER_SEC;
-    printf("### FIN DU CALCUL DE TOUT LES HASHS DES BLOCKS DE LA BLOCKCHAIN EN %fs ###\n",temps);
+    printf("### FIN DU CALCUL DE TOUT LES HASHS DES BLOCKS DE LA BLOCKCHAIN EN %fs ###\n\n",temps);
+    printf("### CHEAT TERMINER ###\n");
     verifBlockChain(blockChain);
     return 1;
   }
 }
 
 BlockChain* genBlockChain(int difficulty, int nbBlock){
-  printf("### GENERATION BLOCKCHAIN ###\n");
+  printf("### GENERATION BLOCKCHAIN ###\n\n");
   float temps;
   clock_t t1, t2;
   t1 = clock();

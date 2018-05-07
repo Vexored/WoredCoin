@@ -30,7 +30,6 @@ int main(int argc, char **argv) {
           printf("Erreur arguments\n");
           return 0;
       }
-      printf("%i", difficulty);
       if(difficulty < 1){
         printf("Erreur arguments\n");
         return 0;
