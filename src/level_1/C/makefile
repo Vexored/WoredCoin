@@ -1,6 +1,6 @@
 # Specific part of the Makefile
 # EXEC contient le nom des exécutables à générer, le nom est indépendant des noms de fichiers auquels le makefile fait appel
-EXEC = main
+EXEC = woredCoin
 # Begin generic part of the Makefile
 # CC indique le compilateur utilisé
 CC=gcc
@@ -24,7 +24,7 @@ endif
 all : $(EXEC)
 
 $(EXEC): block.o blockchain.o transaction.o cheater.o merkel.o sha256.o sha256_utils.o process.o main.o
-	$(CC) -o main block.o blockchain.o transaction.o cheater.o merkel.o sha256.o sha256_utils.o process.o main.o $(LDFLAGS)
+	$(CC) -o $(EXEC) block.o blockchain.o transaction.o cheater.o merkel.o sha256.o sha256_utils.o process.o main.o $(LDFLAGS)
 
 block.o: block.c
 	$(CC) -o block.o -c block.c $(CFLAGS)
